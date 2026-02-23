@@ -54,8 +54,23 @@ body {
   width: 360px;
 }
 
-#chart1, #chart2, #chart3 {
+#chart1, #chart2, #chart3, #map1, #map2 {
   width: 100%;
+}
+
+.maps-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 24px;
+  margin-bottom:32px;
+  flex-wrap: wrap;
+}
+
+.map-card {
+  padding: 14px 14px 8px;
+  width: 520px; 
 }
 
 #tooltip {

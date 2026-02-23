@@ -1,12 +1,26 @@
 console.log("Hello world");
 let data, visual1, visual2, visual3, choloreth;
 
+const map_year = 2020;
+
 const plot_year = 2019;
 Promise.all([
   d3.csv('data/homicide_rate.csv'),
-  d3.csv('data/access_electric.csv')
-]).then(([homicideData, electricData]) => {
+  d3.csv('data/access_electric.csv'),
+  d3.json('data/world.geojson'),
+  d3.csv('data/homicide_all.csv'),
+  d3.csv('data/elecrtric_all.csv')
+]).then(([homicideData, electricData, worldGeo, homicideAll, electricAll]) => {
 
+   homicideAll.forEach(d => {
+    d.Year = +d.Year;
+    d.hrate = +d.hrate;
+  });
+
+  electricAll.forEach(d => {
+    d.Year = +d.Year;
+    d.share = +d.share;
+  });
 
   homicideData.forEach(d => {
     d.Year = +d.Year;
@@ -81,11 +95,38 @@ Promise.all([
 }).filter(d => d !== null);
 
 
-d3.select('#chart3').selectAll('*').remove();
-new ScatterPlot({ parentElement: '#chart3', containerHeight: 280 }, plotData);
+  d3.select('#chart3').selectAll('*').remove();
+  new ScatterPlot({ parentElement: '#chart3', containerHeight: 280 }, plotData);
 
+  const homicideMap = new Map(
+      homicideAll
+        .filter(d => d.Year === map_year && d.Code && !isNaN(d.hrate))
+        .map(d => [d.Code.trim(), d.hrate])
+    );
 
-})
+  const electricityMap = new Map(
+      electricAll
+        .filter(d => d.Year === map_year && d.Code && !isNaN(d.share))
+        .map(d => [d.Code.trim(), d.share])
+    );
+
+  d3.select('#map1').selectAll('*').remove();
+  d3.select('#map2').selectAll('*').remove();
+
+   new ChoroplethMap(
+      { parentElement: '#map1', containerHeight: 380 },
+      worldGeo,
+      homicideMap,
+      d3.interpolateReds
+    );
+
+  new ChoroplethMap(
+      { parentElement: '#map2', containerHeight: 380 },
+      worldGeo,
+      electricityMap,
+      d3.interpolatePurples
+    );
+  })
 .catch(error => {
     console.error('Error:');
     console.log(error);

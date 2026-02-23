@@ -7,7 +7,6 @@ class ScatterPlot {
     };
 
     this.data = _data;
-
     this.initVis();
   }
 
@@ -21,7 +20,7 @@ class ScatterPlot {
     vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
     vis.height = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
-
+   
     vis.svg = d3.select(vis.config.parentElement)
       .append('svg')
       .attr('width', vis.config.containerWidth)
@@ -30,13 +29,13 @@ class ScatterPlot {
     vis.chart = vis.svg.append('g')
       .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
 
-    
+   
     vis.xAxisG = vis.chart.append('g')
       .attr('transform', `translate(0,${vis.height})`);
 
     vis.yAxisG = vis.chart.append('g');
 
-    
+   
     vis.xLabel = vis.chart.append('text')
       .attr('x', vis.width / 2)
       .attr('y', vis.height + 45)
@@ -58,7 +57,7 @@ class ScatterPlot {
 
     
     vis.xScale = d3.scaleLinear()
-      .domain([0, 102])
+      .domain([0, 105])
       .range([0, vis.width]);
 
     vis.yScale = d3.scaleLinear()
@@ -72,43 +71,54 @@ class ScatterPlot {
   renderVis() {
     const vis = this;
 
-    // Axes
-    vis.xAxis = d3.axisBottom(vis.xScale);
-    vis.yAxis = d3.axisLeft(vis.yScale);
+    
+    vis.xAxis = d3.axisBottom(vis.xScale).ticks(5);
+    vis.yAxis = d3.axisLeft(vis.yScale).ticks(5);
 
     vis.xAxisG.call(vis.xAxis);
     vis.yAxisG.call(vis.yAxis);
 
-    
+    const tooltip = d3.select('#tooltip');
+
+  
     const dots = vis.chart.selectAll('.dot')
       .data(vis.data, d => d.Code);
 
-    dots.enter()
+  
+    const dotsEnter = dots.enter()
       .append('circle')
       .attr('class', 'dot')
       .attr('r', 6)
       .attr('fill', 'steelblue')
-      .attr('opacity', 0.8)
-      .merge(dots)
-      .attr('cx', d => vis.xScale(d.electricity))
-      .attr('cy', d => vis.yScale(d.homicide));
-
-    dots.exit().remove();
+      .attr('opacity', 0.8);
 
     
-    const labels = vis.chart.selectAll('.label')
-      .data(vis.data, d => d.Code);
+    dotsEnter.merge(dots)
+      .attr('cx', d => vis.xScale(d.electricity))
+      .attr('cy', d => vis.yScale(d.homicide))
+      .style('cursor', 'pointer')
+      .on('click', (event, d) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-    labels.enter()
-      .append('text')
-      .attr('class', 'label')
-      .attr('font-size', '10px')
-      .merge(labels)
-      .attr('x', d => vis.xScale(d.electricity) + 8)
-      .attr('y', d => vis.yScale(d.homicide) + 4)
-      .text(d => d.Code);
+        
+        tooltip
+          .style('display', 'block')
+          .html(`
+            <div><strong>${d.Entity}</strong> (${d.Code})</div>
+            <div>Electricity: ${(+d.electricity).toFixed(1)}%</div>
+            <div>Homicide rate: ${(+d.homicide).toFixed(2)}</div>
+          `)
+          .style('left', (event.clientX + window.scrollX + 12) + 'px')
+          .style('top', (event.clientY + window.scrollY + 12) + 'px');
+      });
 
-    labels.exit().remove();
+ 
+    dots.exit().remove();
+
+
+    d3.select('body').on('click.tooltip-hide', () => {
+      tooltip.style('display', 'none');
+    });
   }
 }
-

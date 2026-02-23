@@ -64,18 +64,39 @@ class HomicideBarChart {
 
     vis.yAxisG.call(vis.yAxis);
 
-    const bars = vis.chart.selectAll('.bar')
-      .data(vis.data, d => d.Code);
+    const tooltip = d3.select('#tooltip');
 
-    bars.enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .merge(bars)
-      .attr('x', d => vis.xScale(d.Code))
-      .attr('width', vis.xScale.bandwidth())
-      .attr('y', d => vis.yScale(d.rate))
-      .attr('height', d => vis.height - vis.yScale(d.rate));
+	const bars = vis.chart.selectAll('.bar')
+		.data(vis.data, d => d.Code);
 
-    bars.exit().remove();
+	const barsEnter = bars.enter()
+		.append('rect')
+		.attr('class', 'bar');
+
+	barsEnter.merge(bars)
+		.attr('x', d => vis.xScale(d.Code))
+		.attr('width', vis.xScale.bandwidth())
+		.attr('y', d => vis.yScale(d.rate))
+		.attr('height', d => vis.height - vis.yScale(d.rate))
+		.style('cursor', 'pointer')
+		.on('click', (event, d) => {
+			event.preventDefault();
+			event.stopPropagation();
+
+			tooltip
+				.style('display', 'block')
+				.html(`
+					<div><strong>${d.Entity}</strong> (${d.Code})</div>
+					<div>Homicide rate: ${(+d.rate).toFixed(2)}</div>
+					<div>Year: ${d.Year}</div>
+				`)
+				.style('left', (event.clientX + window.scrollX + 12) + 'px')
+				.style('top', (event.clientY + window.scrollY + 12) + 'px');
+		});
+
+	bars.exit().remove();
+	d3.select('body').on('click.tooltip-hide', () => {
+		tooltip.style('display', 'none');
+	});
   }
 }

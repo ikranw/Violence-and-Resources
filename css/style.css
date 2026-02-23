@@ -1,1 +1,44 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: white;
+  color: #111;
+}
 
+.page-title {
+  text-align: center;
+  margin: 24px 0 10px;
+  font-size: 28px;
+}
+
+.charts-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px 24px 30px;
+}
+
+.chart-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 14px 14px 8px;
+  width: 560px;
+}
+
+.chart-title {
+  text-align: center;
+  margin: 6px 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.axis path,
+.axis line {
+  stroke: #999;
+}
+
+.bar {
+  fill: steelblue;
+}

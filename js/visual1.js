@@ -1,56 +1,56 @@
-function showBarChart(data) {
-	// Margin object with properties for the four directions
-	const margin = {top: 5, right: 5, bottom: 20, left: 50};
+function renderHomicideBarChart(data, parentElement) {
 
-	// Width and height as the inner dimensions of the chart area
-	const width = 500 - margin.left - margin.right,
-	height = 140 - margin.top - margin.bottom;
+  // Clear anything that was there before
+  d3.select(parentElement).selectAll('*').remove();
 
-	// Define 'svg' as a child-element (g) from the drawing area and include spaces
-	const svg = d3.select('#chart').append('svg')
-		.attr('width', width + margin.left + margin.right)
-		.attr('height', height + margin.top + margin.bottom)
-		.append('g')
-		.attr('transform', `translate(${margin.left}, ${margin.top})`);
+  const margin = { top: 20, right: 15, bottom: 90, left: 55 };
+  const width = 540 - margin.left - margin.right;
+  const height = 380 - margin.top - margin.bottom;
 
-	// All subsequent functions/properties can basically ignore the margins
+  const svg = d3.select(parentElement)
+    .append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`);
 
-	// Initialize linear and ordinal scales (input domain and output range)
-	const xScale = d3.scaleLinear()
-		.domain([0, d3.max(data, d => d.sales)])
-		.range([0, width]);
+  // X: country codes
+  const xScale = d3.scaleBand()
+    .domain(data.map(d => d.Code))
+    .range([0, width])
+    .padding(0.2);
 
-	const yScale = d3.scaleBand()
-		.domain(data.map(d => d.month))
-		.range([0, height])
-		.paddingInner(0.15);
+  // Y: homicide rate (0 to 100)
+  const yScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range([height, 0]);
 
-	// Initialize axes
-	const xAxis = d3.axisBottom(xScale)
-		.ticks(6)
-		.tickSizeOuter(0);
+  // Axes
+  const xAxis = d3.axisBottom(xScale);
+  const yAxis = d3.axisLeft(yScale).ticks(5);
 
-	const yAxis = d3.axisLeft(yScale)
-		.tickSizeOuter(0);
+  svg.append('g')
+    .attr('class', 'axis x-axis')
+    .attr('transform', `translate(0,${height})`)
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("transform", "rotate(-45)")
+    .attr("dx", "-0.6em")
+    .attr("dy", "0.2em");
 
-	// Draw the axis (move xAxis to the bottom with 'translate')
-	const xAxisGroup = svg.append('g')
-		.attr('class', 'axis x-axis')
-		.attr('transform', `translate(0, ${height})`)
-		.call(xAxis);
+  svg.append('g')
+    .attr('class', 'axis y-axis')
+    .call(yAxis);
 
-	const yAxisGroup = svg.append('g')
-		.attr('class', 'axis y-axis')
-		.call(yAxis);
-
-	// Add rectangles
-	svg.selectAll('rect')
-		.data(data)
-		.enter()
-	  .append('rect')
-		.attr('class', 'bar')
-		.attr('width', d => xScale(d.sales))
-		.attr('height', yScale.bandwidth())
-		.attr('y', d => yScale(d.month))
-		.attr('x', 0);
+  // Bars
+  svg.selectAll('.bar')
+    .data(data)
+    .enter()
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('x', d => xScale(d.Code))
+    .attr('width', xScale.bandwidth())
+    .attr('y', d => yScale(d.rate))
+    .attr('height', d => height - yScale(d.rate));
 }

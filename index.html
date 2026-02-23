@@ -8,8 +8,9 @@
 </head>
 <body>    
    
+    <h1 class="page-title">Violence and Resources Data Visualization</h1>
 
-    <ul class="legend">
+<!--<ul class="legend">
         <li class="legend-btn" category="tropical-cyclone"><span class="legend-symbol"></span> Tropical Cyclone</li>
         <li class="legend-btn" category="drought-wildfire"><span class="legend-symbol"></span> Drought Wildfire</li>
         <li class="legend-btn" category="severe-storm"><span class="legend-symbol"></span> Severe Storm</li>
@@ -19,14 +20,24 @@
     <svg id="timeline"></svg>
 
     <div id="tooltip"></div>
-    <div id="chart"></div>
+
+-->
+    <div class="charts-row">
+        <div class="chart-card">
+            <h2 class="chart-title">Homicide Rate (2022)</h2>
+            <div id="chart1"></div>
+        </div>
+
+        <div class="chart-card">
+            <h2 class="chart-title">Access to Electricity (2023)</h2>
+            <div id="chart2"></div>
+        </div>
+   </div>
 
     <script src="js/d3.v6.min.js"></script>
-
-    <script src="js/main.js"></script>
     <script src="js/visual1.js"></script>
-    <script src="js/visual2.js"></script> 
-    <script src="js/choloreth.js"></script>  
+    <script src="js/visual2.js"></script>  
+    <script src="js/main.js"></script> 
 
 
 </body>

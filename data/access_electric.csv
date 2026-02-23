@@ -1,0 +1,254 @@
+Entity,Code,Year,Share of the population with access to electricity
+Colombia,COL,1990,89.9
+Colombia,COL,1991,91.836655
+Colombia,COL,1992,92.13266
+Colombia,COL,1993,92.42799
+Colombia,COL,1994,92.72196
+Colombia,COL,1995,91.2
+Colombia,COL,1996,93.3031
+Colombia,COL,1997,93.58891
+Colombia,COL,1998,93.87064
+Colombia,COL,1999,94.14753
+Colombia,COL,2000,95.2
+Colombia,COL,2001,98.5
+Colombia,COL,2002,94.9
+Colombia,COL,2003,95.1
+Colombia,COL,2004,95.3
+Colombia,COL,2005,96.8
+Colombia,COL,2006,95.7
+Colombia,COL,2007,96
+Colombia,COL,2008,96.8
+Colombia,COL,2009,96.1
+Colombia,COL,2010,96.8
+Colombia,COL,2011,96.7
+Colombia,COL,2012,97
+Colombia,COL,2013,97.8
+Colombia,COL,2014,97.8
+Colombia,COL,2015,98.2
+Colombia,COL,2016,98.4
+Colombia,COL,2017,98.5
+Colombia,COL,2018,98.5
+Colombia,COL,2019,99.4
+Colombia,COL,2020,99.7
+Colombia,COL,2021,100
+Colombia,COL,2022,100
+Colombia,COL,2023,98.7
+Kenya,KEN,1993,10.9
+Kenya,KEN,1994,3.4734368
+Kenya,KEN,1995,5.4273434
+Kenya,KEN,1996,7.3785305
+Kenya,KEN,1997,9.326318
+Kenya,KEN,1998,14.5
+Kenya,KEN,1999,13.208892
+Kenya,KEN,2000,15.2
+Kenya,KEN,2001,17
+Kenya,KEN,2002,18.9
+Kenya,KEN,2003,16
+Kenya,KEN,2004,22.6
+Kenya,KEN,2005,24.5
+Kenya,KEN,2006,26.4
+Kenya,KEN,2007,28.3
+Kenya,KEN,2008,30.3
+Kenya,KEN,2009,23
+Kenya,KEN,2010,19.2
+Kenya,KEN,2011,36.2
+Kenya,KEN,2012,38.1
+Kenya,KEN,2013,40.1
+Kenya,KEN,2014,36
+Kenya,KEN,2015,41.6
+Kenya,KEN,2016,53.1
+Kenya,KEN,2017,55.8
+Kenya,KEN,2018,61.2
+Kenya,KEN,2019,69.7
+Kenya,KEN,2020,71.5
+Kenya,KEN,2021,76.5
+Kenya,KEN,2022,76
+Kenya,KEN,2023,76.2
+Myanmar,MMR,2000,41.9
+Myanmar,MMR,2001,43
+Myanmar,MMR,2002,47
+Myanmar,MMR,2003,45.1
+Myanmar,MMR,2004,46.2
+Myanmar,MMR,2005,47.3
+Myanmar,MMR,2006,48.4
+Myanmar,MMR,2007,49.5
+Myanmar,MMR,2008,50.6
+Myanmar,MMR,2009,51.8
+Myanmar,MMR,2010,48.8
+Myanmar,MMR,2011,54.1
+Myanmar,MMR,2012,55.3
+Myanmar,MMR,2013,56.5
+Myanmar,MMR,2014,52
+Myanmar,MMR,2015,60.5
+Myanmar,MMR,2016,55.6
+Myanmar,MMR,2017,69.8
+Myanmar,MMR,2018,66.1
+Myanmar,MMR,2019,68.3
+Myanmar,MMR,2020,70.4
+Myanmar,MMR,2021,72.5
+Myanmar,MMR,2022,73.6
+Myanmar,MMR,2023,76.8
+Nigeria,NGA,1990,27.3
+Nigeria,NGA,1991,35.2346
+Nigeria,NGA,1992,36.09946
+Nigeria,NGA,1993,36.963646
+Nigeria,NGA,1994,37.82647
+Nigeria,NGA,1995,38.687252
+Nigeria,NGA,1996,39.54532
+Nigeria,NGA,1997,40.399982
+Nigeria,NGA,1998,41.25057
+Nigeria,NGA,1999,44.9
+Nigeria,NGA,2000,43.2
+Nigeria,NGA,2001,43.9
+Nigeria,NGA,2002,44.6
+Nigeria,NGA,2003,52.2
+Nigeria,NGA,2004,46.1
+Nigeria,NGA,2005,46.8
+Nigeria,NGA,2006,47.6
+Nigeria,NGA,2007,50.1
+Nigeria,NGA,2008,50.3
+Nigeria,NGA,2009,50
+Nigeria,NGA,2010,48
+Nigeria,NGA,2011,55.9
+Nigeria,NGA,2012,53
+Nigeria,NGA,2013,55.6
+Nigeria,NGA,2014,54.2
+Nigeria,NGA,2015,52.5
+Nigeria,NGA,2016,59.3
+Nigeria,NGA,2017,54.4
+Nigeria,NGA,2018,56.5
+Nigeria,NGA,2019,55.4
+Nigeria,NGA,2020,55.4
+Nigeria,NGA,2021,59.5
+Nigeria,NGA,2022,60.5
+Nigeria,NGA,2023,61.2
+Norway,NOR,1990,100
+Norway,NOR,1991,100
+Norway,NOR,1992,100
+Norway,NOR,1993,100
+Norway,NOR,1994,100
+Norway,NOR,1995,100
+Norway,NOR,1996,100
+Norway,NOR,1997,100
+Norway,NOR,1998,100
+Norway,NOR,1999,100
+Norway,NOR,2000,100
+Norway,NOR,2001,100
+Norway,NOR,2002,100
+Norway,NOR,2003,100
+Norway,NOR,2004,100
+Norway,NOR,2005,100
+Norway,NOR,2006,100
+Norway,NOR,2007,100
+Norway,NOR,2008,100
+Norway,NOR,2009,100
+Norway,NOR,2010,100
+Norway,NOR,2011,100
+Norway,NOR,2012,100
+Norway,NOR,2013,100
+Norway,NOR,2014,100
+Norway,NOR,2015,100
+Norway,NOR,2016,100
+Norway,NOR,2017,100
+Norway,NOR,2018,100
+Norway,NOR,2019,100
+Norway,NOR,2020,100
+Norway,NOR,2021,100
+Norway,NOR,2022,100
+Norway,NOR,2023,100
+Romania,ROU,1990,100
+Romania,ROU,1991,100
+Romania,ROU,1992,100
+Romania,ROU,1993,100
+Romania,ROU,1994,100
+Romania,ROU,1995,100
+Romania,ROU,1996,100
+Romania,ROU,1997,100
+Romania,ROU,1998,100
+Romania,ROU,1999,100
+Romania,ROU,2000,94.4
+Romania,ROU,2001,94.6
+Romania,ROU,2002,94.9
+Romania,ROU,2003,95.1
+Romania,ROU,2004,95.3
+Romania,ROU,2005,95.6
+Romania,ROU,2006,95.9
+Romania,ROU,2007,96.1
+Romania,ROU,2008,96.5
+Romania,ROU,2009,96.8
+Romania,ROU,2010,97.1
+Romania,ROU,2011,97.4
+Romania,ROU,2012,97.8
+Romania,ROU,2013,98.1
+Romania,ROU,2014,98.4
+Romania,ROU,2015,98.8
+Romania,ROU,2016,99.1
+Romania,ROU,2017,100
+Romania,ROU,2018,99.8
+Romania,ROU,2019,100
+Romania,ROU,2020,100
+Romania,ROU,2021,100
+Romania,ROU,2022,100
+Romania,ROU,2023,100
+South Africa,ZAF,1996,57.6
+South Africa,ZAF,1997,69.48335
+South Africa,ZAF,1998,64.9
+South Africa,ZAF,1999,71.33179
+South Africa,ZAF,2000,72.4
+South Africa,ZAF,2001,70.2
+South Africa,ZAF,2002,76.7
+South Africa,ZAF,2003,78.8
+South Africa,ZAF,2004,80.6
+South Africa,ZAF,2005,80.8
+South Africa,ZAF,2006,80.7
+South Africa,ZAF,2007,82
+South Africa,ZAF,2008,81.9
+South Africa,ZAF,2009,82.6
+South Africa,ZAF,2010,82.8
+South Africa,ZAF,2011,83.6
+South Africa,ZAF,2012,85.2
+South Africa,ZAF,2013,85.2
+South Africa,ZAF,2014,85.9
+South Africa,ZAF,2015,85.3
+South Africa,ZAF,2016,83.9
+South Africa,ZAF,2017,84.4
+South Africa,ZAF,2018,84.7
+South Africa,ZAF,2019,85
+South Africa,ZAF,2020,90
+South Africa,ZAF,2021,89.3
+South Africa,ZAF,2022,86.5
+South Africa,ZAF,2023,87.7
+United States,USA,1990,100
+United States,USA,1991,100
+United States,USA,1992,100
+United States,USA,1993,100
+United States,USA,1994,100
+United States,USA,1995,100
+United States,USA,1996,100
+United States,USA,1997,100
+United States,USA,1998,100
+United States,USA,1999,100
+United States,USA,2000,100
+United States,USA,2001,100
+United States,USA,2002,100
+United States,USA,2003,100
+United States,USA,2004,100
+United States,USA,2005,100
+United States,USA,2006,100
+United States,USA,2007,100
+United States,USA,2008,100
+United States,USA,2009,100
+United States,USA,2010,100
+United States,USA,2011,100
+United States,USA,2012,100
+United States,USA,2013,100
+United States,USA,2014,100
+United States,USA,2015,100
+United States,USA,2016,100
+United States,USA,2017,100
+United States,USA,2018,100
+United States,USA,2019,100
+United States,USA,2020,100
+United States,USA,2021,100
+United States,USA,2022,100
+United States,USA,2023,100

@@ -1,0 +1,210 @@
+Entity,Code,Year,rate,continent
+Colombia,COL,1990,74.99984,South America
+Colombia,COL,1991,85.877335,South America
+Colombia,COL,1992,83.482,South America
+Colombia,COL,1993,82.57777,South America
+Colombia,COL,1994,77.08795,South America
+Colombia,COL,1995,62.34104,South America
+Colombia,COL,1996,64.037964,South America
+Colombia,COL,1997,62.498066,South America
+Colombia,COL,1998,61.094673,South America
+Colombia,COL,1999,63.333992,South America
+Colombia,COL,2000,67.89216,South America
+Colombia,COL,2001,70.10959,South America
+Colombia,COL,2002,70.396095,South America
+Colombia,COL,2003,57.46086,South America
+Colombia,COL,2004,48.648186,South America
+Colombia,COL,2005,42.989414,South America
+Colombia,COL,2006,40.942974,South America
+Colombia,COL,2007,39.777615,South America
+Colombia,COL,2008,36.884003,South America
+Colombia,COL,2009,35.72724,South America
+Colombia,COL,2010,34.524174,South America
+Colombia,COL,2011,35.63221,South America
+Colombia,COL,2012,35.9613,South America
+Colombia,COL,2013,33.41597,South America
+Colombia,COL,2014,28.654305,South America
+Colombia,COL,2015,27.215279,South America
+Colombia,COL,2016,26.143867,South America
+Colombia,COL,2017,25.551058,South America
+Colombia,COL,2018,23.820759,South America
+Colombia,COL,2019,23.399061,South America
+Colombia,COL,2020,22.642704,South America
+Colombia,COL,2021,25.580128,South America
+Colombia,COL,2022,24.948807,South America
+Colombia,COL,2023,24.913443,South America
+Kenya,KEN,2004,3.4560087,Africa
+Kenya,KEN,2005,3.027113,Africa
+Kenya,KEN,2006,2.996856,Africa
+Kenya,KEN,2007,2.8963346,Africa
+Kenya,KEN,2008,3.0994468,Africa
+Kenya,KEN,2009,4.720446,Africa
+Kenya,KEN,2010,4.629967,Africa
+Kenya,KEN,2011,5.3112297,Africa
+Kenya,KEN,2012,5.4091864,Africa
+Kenya,KEN,2014,5.0052724,Africa
+Kenya,KEN,2015,4.8015943,Africa
+Kenya,KEN,2016,4.908632,Africa
+Kenya,KEN,2017,5.0124226,Africa
+Kenya,KEN,2018,3.1250556,Africa
+Kenya,KEN,2019,3.077955,Africa
+Kenya,KEN,2020,3.5601206,Africa
+Kenya,KEN,2021,5.2537465,Africa
+Kenya,KEN,2022,4.8716683,Africa
+Myanmar,MMR,1990,5.1384764,Asia
+Myanmar,MMR,1995,3.7859106,Asia
+Myanmar,MMR,2000,2.298478,Asia
+Myanmar,MMR,2001,2.0012612,Asia
+Myanmar,MMR,2002,1.7606604,Asia
+Myanmar,MMR,2003,1.6371244,Asia
+Myanmar,MMR,2004,1.5785413,Asia
+Myanmar,MMR,2005,1.425007,Asia
+Myanmar,MMR,2006,1.6260287,Asia
+Myanmar,MMR,2007,1.5563623,Asia
+Myanmar,MMR,2008,1.6346085,Asia
+Myanmar,MMR,2009,1.8063948,Asia
+Myanmar,MMR,2010,1.6338809,Asia
+Myanmar,MMR,2011,2.134771,Asia
+Myanmar,MMR,2012,2.8813674,Asia
+Myanmar,MMR,2013,2.463061,Asia
+Myanmar,MMR,2014,2.4269147,Asia
+Myanmar,MMR,2015,2.548491,Asia
+Myanmar,MMR,2016,2.6002173,Asia
+Myanmar,MMR,2017,2.6823425,Asia
+Myanmar,MMR,2018,2.7777648,Asia
+Myanmar,MMR,2019,2.8855991,Asia
+Myanmar,MMR,2020,2.9632273,Asia
+Myanmar,MMR,2021,28.656734,Asia
+Myanmar,MMR,2022,3.902763,Asia
+Myanmar,MMR,2023,2.5751011,Asia
+Nigeria,NGA,2016,32.43901,Africa
+Nigeria,NGA,2019,21.099298,Africa
+Nigeria,NGA,2023,15.746681,Africa
+Norway,NOR,1990,1.1081144,Europe
+Norway,NOR,1991,1.1732621,Europe
+Norway,NOR,1992,1.0731965,Europe
+Norway,NOR,1993,0.8812898,Europe
+Norway,NOR,1994,0.7609882,Europe
+Norway,NOR,1995,0.9635254,Europe
+Norway,NOR,1996,0.98148096,Europe
+Norway,NOR,1997,0.86265874,Europe
+Norway,NOR,1998,0.85753363,Europe
+Norway,NOR,1999,0.73961395,Europe
+Norway,NOR,2000,1.068836,Europe
+Norway,NOR,2001,0.8197344,Europe
+Norway,NOR,2002,1.0136592,Europe
+Norway,NOR,2004,0.7840161,Europe
+Norway,NOR,2005,0.71380305,Europe
+Norway,NOR,2006,0.70807946,Europe
+Norway,NOR,2007,0.63707656,Europe
+Norway,NOR,2008,0.7130721,Europe
+Norway,NOR,2009,0.60058534,Europe
+Norway,NOR,2010,0.5931487,Europe
+Norway,NOR,2011,2.2410805,Europe
+Norway,NOR,2012,0.53801394,Europe
+Norway,NOR,2013,0.9054896,Europe
+Norway,NOR,2014,0.5644884,Europe
+Norway,NOR,2015,0.46244815,Europe
+Norway,NOR,2016,0.5156625,Europe
+Norway,NOR,2017,0.5306244,Europe
+Norway,NOR,2018,0.47065446,Europe
+Norway,NOR,2019,0.5235866,Europe
+Norway,NOR,2020,0.576286,Europe
+Norway,NOR,2021,0.5362336,Europe
+Norway,NOR,2022,0.5497726,Europe
+Norway,NOR,2023,0.72474706,Europe
+Romania,ROU,1990,3.4699926,Europe
+Romania,ROU,1991,3.5995343,Europe
+Romania,ROU,1992,3.661774,Europe
+Romania,ROU,1993,3.2264771,Europe
+Romania,ROU,1994,3.4100533,Europe
+Romania,ROU,1995,3.3454378,Europe
+Romania,ROU,1996,3.2029228,Europe
+Romania,ROU,1997,3.0921607,Europe
+Romania,ROU,1998,2.5173995,Europe
+Romania,ROU,1999,2.553442,Europe
+Romania,ROU,2000,2.5219696,Europe
+Romania,ROU,2001,3.1888807,Europe
+Romania,ROU,2002,3.0133188,Europe
+Romania,ROU,2003,3.2231996,Europe
+Romania,ROU,2004,2.275359,Europe
+Romania,ROU,2005,2.041164,Europe
+Romania,ROU,2006,1.6971123,Europe
+Romania,ROU,2007,1.8159416,Europe
+Romania,ROU,2008,1.4576174,Europe
+Romania,ROU,2009,1.2538316,Europe
+Romania,ROU,2010,1.3018428,Europe
+Romania,ROU,2011,1.0107479,Europe
+Romania,ROU,2012,1.051668,Europe
+Romania,ROU,2013,1.0865816,Europe
+Romania,ROU,2014,1.62759,Europe
+Romania,ROU,2015,1.706002,Europe
+Romania,ROU,2016,1.5472479,Europe
+Romania,ROU,2017,1.295113,Europe
+Romania,ROU,2018,1.2756487,Europe
+Romania,ROU,2019,1.2511832,Europe
+Romania,ROU,2020,1.4490161,Europe
+Romania,ROU,2021,1.2676536,Europe
+Romania,ROU,2022,1.2886885,Europe
+Romania,ROU,2023,1.1088748,Europe
+Romania,ROU,2024,1.1201626,Europe
+South Africa,ZAF,1994,59.005814,Africa
+South Africa,ZAF,1995,60.341404,Africa
+South Africa,ZAF,1996,56.445694,Africa
+South Africa,ZAF,1997,53.61878,Africa
+South Africa,ZAF,1998,54.35935,Africa
+South Africa,ZAF,1999,48.371147,Africa
+South Africa,ZAF,2000,46.136833,Africa
+South Africa,ZAF,2001,44.999874,Africa
+South Africa,ZAF,2002,44.88393,Africa
+South Africa,ZAF,2003,40.87393,Africa
+South Africa,ZAF,2004,38.35978,Africa
+South Africa,ZAF,2005,37.437843,Africa
+South Africa,ZAF,2006,38.213318,Africa
+South Africa,ZAF,2007,36.41503,Africa
+South Africa,ZAF,2008,35.379326,Africa
+South Africa,ZAF,2009,32.413456,Africa
+South Africa,ZAF,2010,30.362572,Africa
+South Africa,ZAF,2011,29.349825,Africa
+South Africa,ZAF,2012,30.145456,Africa
+South Africa,ZAF,2013,31.132729,Africa
+South Africa,ZAF,2014,32.026356,Africa
+South Africa,ZAF,2015,32.919315,Africa
+South Africa,ZAF,2016,33.21018,Africa
+South Africa,ZAF,2017,35.284016,Africa
+South Africa,ZAF,2018,35.865765,Africa
+South Africa,ZAF,2019,35.787476,Africa
+South Africa,ZAF,2020,32.977566,Africa
+South Africa,ZAF,2021,40.94298,Africa
+South Africa,ZAF,2022,43.720257,Africa
+United States,USA,1990,9.25038,North America
+United States,USA,1991,9.631872,North America
+United States,USA,1992,9.15233,North America
+United States,USA,1993,9.338498,North America
+United States,USA,1994,8.786521,North America
+United States,USA,1995,8.055755,North America
+United States,USA,1996,7.2528057,North America
+United States,USA,1997,6.6581826,North America
+United States,USA,1998,6.147342,North America
+United States,USA,1999,5.567722,North America
+United States,USA,2000,5.5370793,North America
+United States,USA,2001,6.695168,North America
+United States,USA,2002,5.653043,North America
+United States,USA,2006,5.7941914,North America
+United States,USA,2007,5.67445,North America
+United States,USA,2008,5.3988857,North America
+United States,USA,2009,4.9992948,North America
+United States,USA,2010,4.7328067,North America
+United States,USA,2011,4.6675463,North America
+United States,USA,2012,4.6847305,North America
+United States,USA,2013,4.4731393,North America
+United States,USA,2014,4.3835735,North America
+United States,USA,2015,4.8701963,North America
+United States,USA,2016,5.28982,North America
+United States,USA,2017,5.205827,North America
+United States,USA,2018,4.886937,North America
+United States,USA,2019,4.934722,North America
+United States,USA,2020,6.3546557,North America
+United States,USA,2021,6.779722,North America
+United States,USA,2022,6.5126743,North America
+United States,USA,2023,5.7634077,North America

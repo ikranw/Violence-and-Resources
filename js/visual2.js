@@ -6,7 +6,7 @@ class ElectricityBarChart {
       margin: _config.margin || { top: 20, right: 15, bottom: 90, left: 55 }
     };
     this.data = _data;
-    this.valueKey = "Share of the population with access to electricity";
+    this.percent = "Share of the population with access to electricity";
     this.initVis();
   }
 
@@ -65,18 +65,40 @@ class ElectricityBarChart {
 
     vis.yAxisG.call(vis.yAxis);
 
-    const bars = vis.chart.selectAll('.bar')
-      .data(vis.data, d => d.Code);
+    
+    const tooltip = d3.select('#tooltip');
 
-    bars.enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .merge(bars)
-      .attr('x', d => vis.xScale(d.Code))
-      .attr('width', vis.xScale.bandwidth())
-      .attr('y', d => vis.yScale(d[vis.valueKey]))
-      .attr('height', d => vis.height - vis.yScale(d[vis.valueKey]));
+	const bars = vis.chart.selectAll('.bar')
+		.data(vis.data, d => d.Code);
 
-    bars.exit().remove();
+	const barsEnter = bars.enter()
+		.append('rect')
+		.attr('class', 'bar');
+
+	barsEnter.merge(bars)
+		.attr('x', d => vis.xScale(d.Code))
+		.attr('width', vis.xScale.bandwidth())
+		.attr('y', d => vis.yScale(d[vis.percent]))
+		.attr('height', d => vis.height - vis.yScale(d[vis.percent]))
+		.style('cursor', 'pointer')
+		.on('click', (event, d) => {
+			event.preventDefault();
+			event.stopPropagation();
+
+			tooltip
+				.style('display', 'block')
+				.html(`
+					<div><strong>${d.Entity}</strong> (${d.Code})</div>
+					<div>Electricity: ${(+d[vis.percent]).toFixed(1)}%</div>
+					<div>Year: ${d.Year}</div>
+				`)
+				.style('left', (event.clientX + window.scrollX + 12) + 'px')
+				.style('top', (event.clientY + window.scrollY + 12) + 'px');
+		});
+
+	bars.exit().remove();
+	d3.select('body').on('click.tooltip-hide', () => {
+		tooltip.style('display', 'none');
+	});
   }
 }

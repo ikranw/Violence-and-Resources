@@ -1,56 +1,81 @@
-function renderHomicideBarChart(data, parentElement) {
+class HomicideBarChart {
+  constructor(_config, _data) {
+    this.config = {
+      parentElement: _config.parentElement,
+      containerHeight: _config.containerHeight || 280,
+      margin: _config.margin || { top: 20, right: 15, bottom: 90, left: 55 }
+    };
+    this.data = _data;
+    this.initVis();
+  }
 
-  // Clear anything that was there before
-  d3.select(parentElement).selectAll('*').remove();
+  initVis() {
+    const vis = this;
 
-  const margin = { top: 20, right: 15, bottom: 90, left: 55 };
-  const width = 540 - margin.left - margin.right;
-  const height = 380 - margin.top - margin.bottom;
+    vis.config.containerWidth =
+      d3.select(vis.config.parentElement).node().getBoundingClientRect().width;
 
-  const svg = d3.select(parentElement)
-    .append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
-    .append('g')
-    .attr('transform', `translate(${margin.left},${margin.top})`);
+    vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
+    vis.height = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
-  // X: country codes
-  const xScale = d3.scaleBand()
-    .domain(data.map(d => d.Code))
-    .range([0, width])
-    .padding(0.2);
+    vis.svg = d3.select(vis.config.parentElement)
+      .append('svg')
+      .attr('width', vis.config.containerWidth)
+      .attr('height', vis.config.containerHeight);
 
-  // Y: homicide rate (0 to 100)
-  const yScale = d3.scaleLinear()
-    .domain([0, 100])
-    .range([height, 0]);
+    vis.chart = vis.svg.append('g')
+      .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
 
-  // Axes
-  const xAxis = d3.axisBottom(xScale);
-  const yAxis = d3.axisLeft(yScale).ticks(5);
+    vis.xAxisG = vis.chart.append('g')
+      .attr('transform', `translate(0,${vis.height})`);
 
-  svg.append('g')
-    .attr('class', 'axis x-axis')
-    .attr('transform', `translate(0,${height})`)
-    .call(xAxis)
-    .selectAll("text")
-    .style("text-anchor", "end")
-    .attr("transform", "rotate(-45)")
-    .attr("dx", "-0.6em")
-    .attr("dy", "0.2em");
+    vis.yAxisG = vis.chart.append('g');
 
-  svg.append('g')
-    .attr('class', 'axis y-axis')
-    .call(yAxis);
+    vis.updateVis();
+  }
 
-  // Bars
-  svg.selectAll('.bar')
-    .data(data)
-    .enter()
-    .append('rect')
-    .attr('class', 'bar')
-    .attr('x', d => xScale(d.Code))
-    .attr('width', xScale.bandwidth())
-    .attr('y', d => yScale(d.rate))
-    .attr('height', d => height - yScale(d.rate));
+  updateVis() {
+    const vis = this;
+
+    vis.xScale = d3.scaleBand()
+      .domain(vis.data.map(d => d.Code))
+      .range([0, vis.width])
+      .padding(0.2);
+
+    vis.yScale = d3.scaleLinear()
+      .domain([0, 100])
+      .range([vis.height, 0]);
+
+    vis.xAxis = d3.axisBottom(vis.xScale);
+    vis.yAxis = d3.axisLeft(vis.yScale).ticks(5);
+
+    vis.renderVis();
+  }
+
+  renderVis() {
+    const vis = this;
+
+    vis.xAxisG.call(vis.xAxis)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("transform", "rotate(-45)")
+      .attr("dx", "-0.6em")
+      .attr("dy", "0.2em");
+
+    vis.yAxisG.call(vis.yAxis);
+
+    const bars = vis.chart.selectAll('.bar')
+      .data(vis.data, d => d.Code);
+
+    bars.enter()
+      .append('rect')
+      .attr('class', 'bar')
+      .merge(bars)
+      .attr('x', d => vis.xScale(d.Code))
+      .attr('width', vis.xScale.bandwidth())
+      .attr('y', d => vis.yScale(d.rate))
+      .attr('height', d => vis.height - vis.yScale(d.rate));
+
+    bars.exit().remove();
+  }
 }

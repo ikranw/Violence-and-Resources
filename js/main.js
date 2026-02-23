@@ -1,6 +1,7 @@
 console.log("Hello world");
-let data, visual1, visual2,choloreth;
+let data, visual1, visual2, visual3, choloreth;
 
+const plot_year = 2019;
 Promise.all([
   d3.csv('data/homicide_rate.csv'),
   d3.csv('data/access_electric.csv')
@@ -17,9 +18,17 @@ Promise.all([
 
   const homicideTop = homicide2022
     .sort((a, b) => b.rate - a.rate)
-    .slice(0, 25);
+    .slice(0, 8);
+   
+  const homicide2019 = homicideData.filter(d =>
+  d.Year === plot_year && !isNaN(d.rate)
+);
 
-  renderHomicideBarChart(homicideTop, '#chart1');
+  d3.select('#chart1').selectAll('*').remove();
+  visual1 = new HomicideBarChart(
+  { parentElement: '#chart1', containerHeight: 280 },
+  homicideTop
+);
 
 
 
@@ -39,14 +48,49 @@ Promise.all([
       b["Share of the population with access to electricity"] -
       a["Share of the population with access to electricity"]
     )
-    .slice(0, 25);
+    .slice(0, 8);
+  
+  const electric2019 = electricData.filter(d => d.Year === plot_year && !isNaN(d["Share of the population with access to electricity"]));
 
-  renderElectricityBarChart(electricTop, '#chart2');
+  
+    
+  d3.select('#chart2').selectAll('*').remove();
+  visual2 = new ElectricityBarChart(
+    { parentElement: '#chart2', containerHeight: 280 },
+    electricTop
+  );
+
+  const electric2019Map = new Map(
+  electricData
+    .filter(d => d.Year === plot_year && d.Code && !isNaN(d["Share of the population with access to electricity"]))
+    .map(d => [d.Code, +d["Share of the population with access to electricity"]])
+);
+
+  const plotData = homicideData
+  .filter(d => d.Year === plot_year && d.Code && !isNaN(d.rate))
+  .map(d => {
+    const electricity = electric2019Map.get(d.Code);
+    if (electricity === undefined) return null;
+
+    return {
+      Code: d.Code,
+      Entity: d.Entity,
+      homicide: d.rate,
+      electricity: electricity
+    };
+}).filter(d => d !== null);
+
+
+d3.select('#chart3').selectAll('*').remove();
+new ScatterPlot({ parentElement: '#chart3', containerHeight: 280 }, plotData);
+
+
 })
 .catch(error => {
     console.error('Error:');
     console.log(error);
 });
+
 
 
 //class example below, ignore for now

@@ -100,7 +100,7 @@ class ChoroplethMap {
           .html(`
             <div><strong>${name}</strong> (${code})</div>
             <div>${label}: <strong>${formattedVal}</strong></div>
-            <div style="font-size:10px; color:#888; margin-top:4px;">Year: ${vis.config.year || 2020}</div>
+            <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${vis.config.year || 2020}</div>
           `);
       })
       .on('mouseleave', () => tooltip.style('display', 'none'));
@@ -165,7 +165,7 @@ class ChoroplethMap {
       .attr('y', legendHeight + 14)
       .attr('text-anchor', 'end')
       .attr('font-size', 11)
-      .attr('fill', '#555')
+      .attr('fill', '#333')
       .text(vis.domainMax % 1 === 0 ? vis.domainMax : vis.domainMax.toFixed(1));
 
     legendG.append('text')
@@ -173,7 +173,7 @@ class ChoroplethMap {
       .attr('y', legendHeight + 14)
       .attr('text-anchor', 'middle')
       .attr('font-size', 11)
-      .attr('fill', '#555')
+      .attr('fill', '#333')
       .text((vis.domainMax / 2) % 1 === 0
         ? vis.domainMax / 2
         : (vis.domainMax / 2).toFixed(1));
@@ -183,7 +183,7 @@ class ChoroplethMap {
       .attr('y', legendHeight + 27)
       .attr('text-anchor', 'middle')
       .attr('font-size', 11)
-      .attr('fill', '#555')
+      .attr('fill', '#333')
       .text(vis.label);
   
     }

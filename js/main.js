@@ -2,8 +2,9 @@ console.log("Hello world");
 let data, visual1, visual2, visual3, choloreth;
 
 const map_year = 2020;
-
 const plot_year = 2019;
+
+
 Promise.all([
   d3.csv('data/homicide_rate.csv'),
   d3.csv('data/access_electric.csv'),
@@ -131,7 +132,7 @@ Promise.all([
     );
   })
 
-  
+
 .catch(error => {
     console.error('Error:');
     console.log(error);

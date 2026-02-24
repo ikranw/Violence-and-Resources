@@ -10,6 +10,34 @@ body {
   margin: 24px 0 10px;
   font-size: 16px;
 }
+.site-header {
+  background: #8B4513;
+  color: white;
+  padding: 20px 0 18px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.header-title {
+  margin: 0 0 8px 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+.header-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: white;
+  line-height: 1.6; 
+}
 
 .charts-row {
   display: flex;
@@ -21,17 +49,27 @@ body {
 
 .chart-card {
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  padding: 14px 14px 8px;
+  padding: 14px 14px 10px;
   width: 360px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
 .chart-title {
   text-align: center;
-  margin: 6px 0 10px;
-  font-size: 16px;
-  font-weight: 200;
+  margin: 0 0 2px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+.chart-subtitle {
+  text-align: center;
+  margin: 0 0 10px 0;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.4;
 }
 
 .axis path,
@@ -40,9 +78,12 @@ body {
 }
 
 .bar {
-  fill: steelblue;
+  fill: #8B4513;
 }
 
+.bar:hover {
+  fill: #DEB887;
+}
 
 .plot-row {
   display: flex;
@@ -71,6 +112,12 @@ body {
 .map-card {
   padding: 14px 14px 8px;
   width: 520px; 
+}
+.dot {
+  transition: r 0.1s, opacity 0.1s;
+}
+.dot:hover {
+  opacity: 1 !important;
 }
 
 #tooltip {

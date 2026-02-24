@@ -1,6 +1,7 @@
 
+
 class ChoroplethMap {
-  constructor(_config, _geoData, _valueByCode, _colorInterpolator) {
+  constructor(_config, _geoData, _valueByCode, _colorInterpolator, _label) {
     this.config = {
       parentElement: _config.parentElement,
       containerHeight: _config.containerHeight || 380,
@@ -11,6 +12,7 @@ class ChoroplethMap {
     this.valueByCode = _valueByCode;     
     this.colorInterpolator = _colorInterpolator;
 
+    this.label = _label || '';
     this.initVis();
   }
 
@@ -34,10 +36,24 @@ class ChoroplethMap {
     vis.projection = d3.geoMercator();
     vis.geoPath = d3.geoPath().projection(vis.projection);
 
-    vis.projection.fitSize([vis.width, vis.height - 30], vis.geoData);
+   /**vis.projection.fitSize([vis.width, vis.height - 30], vis.geoData);
 
     vis.colorScale = d3.scaleSequential(vis.colorInterpolator)
-      .domain([0, 100]);
+      .domain([0, 100]); **/
+
+    const new_features = vis.geoData.features.filter(d => d.id !== 'ATA' && d.id !== 'ATF');
+    const geo_new = { type: 'FeatureCollection', features: new_features };
+    vis.projection.fitSize([vis.width, vis.height], geo_new);
+
+    
+    const vals = Array.from(vis.valueByCode.values()).filter(v => !isNaN(v));
+    const maxVal = d3.max(vals) || 100;
+    vis.colorScale = d3.scaleSequential(vis.colorInterpolator)
+      .domain([0, maxVal]);
+
+    vis.domainMax = maxVal;
+    vis.new_features = new_features;
+
 
     vis.updateVis();
   }
@@ -52,7 +68,8 @@ class ChoroplethMap {
 
     
     vis.chart.selectAll('.country')
-      .data(vis.geoData.features)
+      //.data(vis.geoData.features)
+      .data(vis.new_features)
       .join('path')
       .attr('class', 'country')
       .attr('d', vis.geoPath)
@@ -101,22 +118,28 @@ class ChoroplethMap {
     const legendHeight = 12;
 
     const legendX = (vis.config.containerWidth - legendWidth) / 2;
-    const legendY = vis.config.containerHeight - 28;
+    const legendY = vis.config.containerHeight - 44;
 
     const defs = vis.svg.append('defs');
-    const gradientId = `legend-gradient-${vis.config.parentElement.replace('#', '')}`;
-
+    //const gradientId = `legend-gradient-${vis.config.parentElement.replace('#', '')}`;
+    const gradientId = `lg-${vis.config.parentElement.replace(/[^a-z0-9]/gi, '')}`;
     const linearGradient = defs.append('linearGradient')
       .attr('id', gradientId)
       .attr('x1', '0%').attr('x2', '100%')
       .attr('y1', '0%').attr('y2', '0%');
 
-    const stops = d3.range(0, 101, 5);
+    /**const stops = d3.range(0, 101, 5);
     linearGradient.selectAll('stop')
       .data(stops)
       .join('stop')
       .attr('offset', d => `${d}%`)
-      .attr('stop-color', d => vis.colorScale(d));
+      .attr('stop-color', d => vis.colorScale(d));**/
+
+    d3.range(0, 101, 5).forEach(pct => {
+      linearGradient.append('stop')
+        .attr('offset', `${pct}%`)
+        .attr('stop-color', vis.colorScale(vis.domainMax * pct / 100));
+    });
 
     const legendG = vis.svg.append('g')
       .attr('class', 'legend')
@@ -125,6 +148,7 @@ class ChoroplethMap {
     legendG.append('rect')
       .attr('width', legendWidth)
       .attr('height', legendHeight)
+      .attr('rx', 4)
       .attr('fill', `url(#${gradientId})`)
       .attr('stroke', '#999')
       .attr('stroke-width', 0.5);
@@ -133,6 +157,7 @@ class ChoroplethMap {
       .attr('x', 0)
       .attr('y', legendHeight + 14)
       .attr('font-size', 11)
+      .attr('fill', '#333')
       .text('0');
 
     legendG.append('text')
@@ -140,6 +165,26 @@ class ChoroplethMap {
       .attr('y', legendHeight + 14)
       .attr('text-anchor', 'end')
       .attr('font-size', 11)
-      .text('100');
-  }
+      .attr('fill', '#555')
+      .text(vis.domainMax % 1 === 0 ? vis.domainMax : vis.domainMax.toFixed(1));
+
+    legendG.append('text')
+      .attr('x', legendWidth / 2)
+      .attr('y', legendHeight + 14)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', 11)
+      .attr('fill', '#555')
+      .text((vis.domainMax / 2) % 1 === 0
+        ? vis.domainMax / 2
+        : (vis.domainMax / 2).toFixed(1));
+
+    legendG.append('text')
+      .attr('x', legendWidth / 2)
+      .attr('y', legendHeight + 27)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', 11)
+      .attr('fill', '#555')
+      .text(vis.label);
+  
+    }
 }

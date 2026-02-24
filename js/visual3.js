@@ -40,6 +40,7 @@ class ScatterPlot {
       .attr('x', vis.width / 2)
       .attr('y', vis.height + 45)
       .attr('text-anchor', 'middle')
+      .attr('font-size', 11)
       .text('Access to Electricity (%)');
 
     vis.yLabel = vis.chart.append('text')
@@ -47,6 +48,7 @@ class ScatterPlot {
       .attr('x', -vis.height / 2)
       .attr('y', -45)
       .attr('text-anchor', 'middle')
+      .attr('font-size', 11)
       .text('Homicide Rate');
 
     vis.updateVis();
@@ -89,7 +91,7 @@ class ScatterPlot {
       .append('circle')
       .attr('class', 'dot')
       .attr('r', 6)
-      .attr('fill', 'steelblue')
+      .attr('fill', ' #8B4513')
       .attr('opacity', 0.8);
 
     
@@ -97,7 +99,7 @@ class ScatterPlot {
       .attr('cx', d => vis.xScale(d.electricity))
       .attr('cy', d => vis.yScale(d.homicide))
       .style('cursor', 'pointer')
-      .on('click', (event, d) => {
+      .on('mousemove', (event, d) => {
         event.preventDefault();
         event.stopPropagation();
 
@@ -106,8 +108,9 @@ class ScatterPlot {
           .style('display', 'block')
           .html(`
             <div><strong>${d.Entity}</strong> (${d.Code})</div>
-            <div>Electricity: ${(+d.electricity).toFixed(1)}%</div>
-            <div>Homicide rate: ${(+d.homicide).toFixed(2)}</div>
+            <div>Electricity: <strong>${(+d.electricity).toFixed(1)}%</strong></div>
+            <div>Homicide rate: <strong>${(+d.homicide).toFixed(2)}</strong></div>
+            <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${plot_year}</div>
           `)
           .style('left', (event.clientX + window.scrollX + 12) + 'px')
           .style('top', (event.clientY + window.scrollY + 12) + 'px');

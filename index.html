@@ -8,8 +8,19 @@
 </head>
 <body>    
    
-    <h1 class="page-title">Violence and Resources Data Visualization</h1>
-
+    <!-- <h1 class="page-title">Violence and Resources Data Visualization</h1> -->
+ <header class="site-header">
+        <div class="header-inner">
+            <h1 class="header-title">Violence &amp; Resources Data Visualization</h1>
+            <p class="header-subtitle">
+                   Interactive visualizations to explore countries' data with violence and resources, 
+                   like water, electricity, and more  to see if there
+                    are any correlations between the two. Data sourced from UNODC (United Nations Office on Drugs and Crime)
+                     and 
+                    Our World in Data.
+            </p>
+        </div>
+    </header>
 <!--<ul class="legend">
         <li class="legend-btn" category="tropical-cyclone"><span class="legend-symbol"></span> Tropical Cyclone</li>
         <li class="legend-btn" category="drought-wildfire"><span class="legend-symbol"></span> Drought Wildfire</li>
@@ -25,16 +36,19 @@
     <div class="charts-row">
         <div class="chart-card">
             <h2 class="chart-title">Homicide Rate (2022)</h2>
+             <p class="chart-subtitle"> Annual number of deaths from homicide per 100,000 people </p>
             <div id="chart1"></div>
         </div>
 
         <div class="chart-card">
-            <h2 class="chart-title"> Share of the population with access to electricity (2023)</h2>
+            <h2 class="chart-title"> Access to Electricity (2023)</h2>
+            <p class="chart-subtitle"> Share of the population (%) with access to electricity source at least 4 hours a day </p>
             <div id="chart2"></div>
         </div>
 
         <div class="chart-card">
             <h2 class="chart-title">Homicide Rate vs. Electricity Access (2019)</h2>
+            <p class="chart-subtitle"> Each dot is a country in the world and its data </p>
             <div id="chart3"></div>
         </div>
    </div>

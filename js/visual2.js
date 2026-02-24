@@ -27,6 +27,15 @@ class ElectricityBarChart {
     vis.chart = vis.svg.append('g')
       .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
 
+    vis.chart.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -vis.height / 2)
+        .attr('y', -42)
+        .attr('text-anchor', 'middle')
+        .attr('font-size', 11)
+        .attr('fill', '#666')
+        .text('% of population');
+
     vis.xAxisG = vis.chart.append('g')
       .attr('transform', `translate(0,${vis.height})`);
 
@@ -81,7 +90,7 @@ class ElectricityBarChart {
 		.attr('y', d => vis.yScale(d[vis.percent]))
 		.attr('height', d => vis.height - vis.yScale(d[vis.percent]))
 		.style('cursor', 'pointer')
-		.on('click', (event, d) => {
+		.on('mousemove', (event, d) => {
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -89,8 +98,8 @@ class ElectricityBarChart {
 				.style('display', 'block')
 				.html(`
 					<div><strong>${d.Entity}</strong> (${d.Code})</div>
-					<div>Electricity: ${(+d[vis.percent]).toFixed(1)}%</div>
-					<div>Year: ${d.Year}</div>
+					<div>Electricity: <strong>${(+d[vis.percent]).toFixed(1)}%</strong></div>
+					<div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${d.Year}</div>
 				`)
 				.style('left', (event.clientX + window.scrollX + 12) + 'px')
 				.style('top', (event.clientY + window.scrollY + 12) + 'px');

@@ -34,8 +34,8 @@ Promise.all([
     .sort((a, b) => b.rate - a.rate)
     .slice(0, 8);
    
-  const homicide2019 = homicideData.filter(d =>
-  d.Year === plot_year && !isNaN(d.rate)
+  const homicide2019 = homicideAll.filter(d =>
+  d.Year === plot_year && !isNaN(d.hrate)
 );
 
   d3.select('#chart1').selectAll('*').remove();
@@ -64,7 +64,7 @@ Promise.all([
     )
     .slice(0, 8);
   
-  const electric2019 = electricData.filter(d => d.Year === plot_year && !isNaN(d["Share of the population with access to electricity"]));
+  const electric2019 = electricAll.filter(d => d.Year === plot_year && !isNaN(d.share));
 
   
     
@@ -75,21 +75,22 @@ Promise.all([
   );
 
   const electric2019Map = new Map(
-  electricData
-    .filter(d => d.Year === plot_year && d.Code && !isNaN(d["Share of the population with access to electricity"]))
-    .map(d => [d.Code, +d["Share of the population with access to electricity"]])
-);
+  electricAll
+      .filter(d => d.Year === plot_year && d.Code && !isNaN(d.share))
+      .map(d => [d.Code.trim(), d.share])
+  );
 
-  const plotData = homicideData
-  .filter(d => d.Year === plot_year && d.Code && !isNaN(d.rate))
-  .map(d => {
-    const electricity = electric2019Map.get(d.Code);
+  const plotData = homicideAll
+    .filter(d => d.Year === plot_year && d.Code && !isNaN(d.hrate))
+    .map(d => {
+    const electricity = electric2019Map.get(d.Code.trim());
     if (electricity === undefined) return null;
 
     return {
       Code: d.Code,
       Entity: d.Entity,
-      homicide: d.rate,
+      region: d['World region according to OWID'] || '',
+      homicide: d.hrate,
       electricity: electricity
     };
 }).filter(d => d !== null);
@@ -117,16 +118,20 @@ Promise.all([
       { parentElement: '#map1', containerHeight: 380 },
       worldGeo,
       homicideMap,
-      d3.interpolateReds
+      d3.interpolateReds,
+      'Homicide rate per 100,000 people'
     );
 
   new ChoroplethMap(
       { parentElement: '#map2', containerHeight: 380 },
       worldGeo,
       electricityMap,
-      d3.interpolatePurples
+      d3.interpolatePurples,
+      '% of population with access to electricity'
     );
   })
+
+  
 .catch(error => {
     console.error('Error:');
     console.log(error);

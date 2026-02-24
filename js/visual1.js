@@ -25,6 +25,14 @@ class HomicideBarChart {
 
     vis.chart = vis.svg.append('g')
       .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
+	vis.chart.append('text')
+		.attr('transform', 'rotate(-90)')
+		.attr('x', -vis.height / 2)
+		.attr('y', -42)
+		.attr('text-anchor', 'middle')
+		.attr('font-size', 11)
+		.attr('fill', '#666')
+		.text('Per 100,000 people');
 
     vis.xAxisG = vis.chart.append('g')
       .attr('transform', `translate(0,${vis.height})`);
@@ -79,7 +87,7 @@ class HomicideBarChart {
 		.attr('y', d => vis.yScale(d.rate))
 		.attr('height', d => vis.height - vis.yScale(d.rate))
 		.style('cursor', 'pointer')
-		.on('click', (event, d) => {
+		.on('mousemove', (event, d) => {
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -87,8 +95,8 @@ class HomicideBarChart {
 				.style('display', 'block')
 				.html(`
 					<div><strong>${d.Entity}</strong> (${d.Code})</div>
-					<div>Homicide rate: ${(+d.rate).toFixed(2)}</div>
-					<div>Year: ${d.Year}</div>
+					<div>Homicide rate: <strong>${(+d.rate).toFixed(2)}</strong></div>
+					<div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${d.Year}</div>
 				`)
 				.style('left', (event.clientX + window.scrollX + 12) + 'px')
 				.style('top', (event.clientY + window.scrollY + 12) + 'px');

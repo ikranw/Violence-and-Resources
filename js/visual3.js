@@ -3,7 +3,10 @@ class ScatterPlot {
     this.config = {
       parentElement: _config.parentElement,
       containerHeight: _config.containerHeight || 320,
-      margin: _config.margin || { top: 20, right: 50, bottom: 60, left: 60 }
+      margin: _config.margin || { top: 20, right: 50, bottom: 60, left: 60 },
+      xLabel: _config.xLabel || 'Access to Electricity (%)',
+      yLabel: _config.yLabel || 'Homicide Rate',
+      dotColor: _config.dotColor || '#8B4513'
     };
 
     this.data = _data;
@@ -41,7 +44,7 @@ class ScatterPlot {
       .attr('y', vis.height + 45)
       .attr('text-anchor', 'middle')
       .attr('font-size', 11)
-      .text('Access to Electricity (%)');
+      .text(vis.config.xLabel);
 
     vis.yLabel = vis.chart.append('text')
       .attr('transform', 'rotate(-90)')
@@ -49,7 +52,7 @@ class ScatterPlot {
       .attr('y', -45)
       .attr('text-anchor', 'middle')
       .attr('font-size', 11)
-      .text('Homicide Rate');
+      .text(vis.config.yLabel);
 
     vis.updateVis();
   }
@@ -59,11 +62,12 @@ class ScatterPlot {
 
     
     vis.xScale = d3.scaleLinear()
-      .domain([0, 105])
+      .domain([0, d3.max(vis.data, d => d.electricity) * 1.05 || 105])
+      .nice()
       .range([0, vis.width]);
 
     vis.yScale = d3.scaleLinear()
-      .domain([0, d3.max(vis.data, d => d.homicide) * 1.05])
+      .domain([0, d3.max(vis.data, d => d.homicide) * 1.05 || 105])
       .nice()
       .range([vis.height, 0]);
 
@@ -91,7 +95,7 @@ class ScatterPlot {
       .append('circle')
       .attr('class', 'dot')
       .attr('r', 6)
-      .attr('fill', ' #8B4513')
+      .attr('fill', vis.config.dotColor)
       .attr('opacity', 0.8);
 
     
@@ -108,8 +112,9 @@ class ScatterPlot {
           .style('display', 'block')
           .html(`
             <div><strong>${d.Entity}</strong> (${d.Code})</div>
-            <div>Electricity: <strong>${(+d.electricity).toFixed(1)}%</strong></div>
-            <div>Homicide rate: <strong>${(+d.homicide).toFixed(2)}</strong></div>
+            ${d.region ? `<div style="font-size:11px;color:#999">${d.region}</div>` : ''}
+            <div>${d.rLabel || 'Resources'}: <strong>${(+d.electricity) >= 1000 ? d3.format(',.0f')(d.electricity) : (+d.electricity).toFixed(1)}</strong></div>
+            <div>${d.vLabel || 'Violence'}: <strong>${(+d.homicide) >= 1000 ? d3.format(',.0f')(d.homicide) : (+d.homicide).toFixed(2)}</strong></div>
             <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${plot_year}</div>
           `)
           .style('left', (event.clientX + window.scrollX + 12) + 'px')

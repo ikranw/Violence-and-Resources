@@ -3,7 +3,8 @@ class HomicideBarChart {
     this.config = {
       parentElement: _config.parentElement,
       containerHeight: _config.containerHeight || 280,
-      margin: _config.margin || { top: 20, right: 15, bottom: 90, left: 55 }
+      margin: _config.margin || { top: 20, right: 15, bottom: 90, left: 55 },
+      totalCountForYear: _config.totalCountForYear || 25
     };
     this.data = _data;
     this.initVis();
@@ -32,7 +33,8 @@ class HomicideBarChart {
 		.attr('text-anchor', 'middle')
 		.attr('font-size', 11)
 		.attr('fill', '#666')
-		.text('Per 100,000 people');
+		.text(vis.config.yLabel || 'Per 100,000 people');
+		
 
     vis.xAxisG = vis.chart.append('g')
       .attr('transform', `translate(0,${vis.height})`);
@@ -45,17 +47,23 @@ class HomicideBarChart {
   updateVis() {
     const vis = this;
 
+    // Compute total count across all years for percentile (use unique codes as proxy)
+    const allCodes = new Set(vis.data.map(d => d.Code));
+    vis.totalCount = vis.data.length; // already filtered to top 25
+
     vis.xScale = d3.scaleBand()
       .domain(vis.data.map(d => d.Code))
       .range([0, vis.width])
       .padding(0.2);
 
     vis.yScale = d3.scaleLinear()
-      .domain([0, 100])
+       .domain([0, d3.max(vis.data, d => d.rate) * 1.1 || 100])
+      .nice()
       .range([vis.height, 0]);
-
+	  
     vis.xAxis = d3.axisBottom(vis.xScale);
-    vis.yAxis = d3.axisLeft(vis.yScale).ticks(5);
+    vis.yAxis = d3.axisLeft(vis.yScale).ticks(5)
+      .tickFormat(d => d >= 1000 ? d3.format('.2s')(d) : d);
 
     vis.renderVis();
   }
@@ -91,11 +99,16 @@ class HomicideBarChart {
 			event.preventDefault();
 			event.stopPropagation();
 
+			// rank within this sorted top-25 (1 = highest)
+			const rank = vis.data.indexOf(d) + 1;
+			const topPct = ((rank / vis.config.totalCountForYear) * 100).toFixed(1);
+
 			tooltip
 				.style('display', 'block')
 				.html(`
 					<div><strong>${d.Entity}</strong> (${d.Code})</div>
-					<div>Homicide rate: <strong>${(+d.rate).toFixed(2)}</strong></div>
+					<div>${d.rateLabel || 'Value'}: <strong>${(+d.rate) >= 1000 ? d3.format(',.0f')(+d.rate) : (+d.rate).toFixed(2)}</strong> ${d.rateUnit || ''}</div>
+					<div style="font-size:11px; color:#888; margin-top:2px;">Top ${topPct}% globally</div>
 					<div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${d.Year}</div>
 				`)
 				.style('left', (event.clientX + window.scrollX + 12) + 'px')

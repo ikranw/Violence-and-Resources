@@ -135,3 +135,41 @@ body {
   pointer-events: none;
 
 }
+
+.main-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 0 20px 40px;
+}
+.charts-area { flex: 1; min-width: 0; }
+
+.selector-panel {
+  width: 190px;
+  flex-shrink: 0;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 14px 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  top: 16px;
+}
+.panel-title { margin: 0 0 4px; font-size: 13px; font-weight: 700; }
+.panel-hint  { margin: 0 0 12px; font-size: 10px; color: #999; line-height: 1.4; }
+
+.attr-group  { margin-bottom: 14px; border-top: 1px solid #f0f0f0; padding-top: 8px; }
+.group-label { font-size: 10px; font-weight: 700; text-transform: uppercase;
+               letter-spacing: 0.5px; margin-bottom: 6px; }
+.violence-label  { color: #c0392b; }
+.resources-label { color: #9c29b9; }
+
+.attr-label {
+  display: block;
+  font-size: 12px;
+  color: #333;
+  padding: 4px 4px 4px 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.attr-label:hover { background: #f7f7f7; }
+.attr-label input { accent-color: #8B4513; margin-right: 5px; }

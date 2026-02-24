@@ -6,7 +6,7 @@ class ElectricityBarChart {
       margin: _config.margin || { top: 20, right: 15, bottom: 90, left: 55 }
     };
     this.data = _data;
-    this.percent = "Share of the population with access to electricity";
+    this.percent = _config.resourceKey || "Share of the population with access to electricity";
     this.initVis();
   }
 
@@ -34,12 +34,20 @@ class ElectricityBarChart {
         .attr('text-anchor', 'middle')
         .attr('font-size', 11)
         .attr('fill', '#666')
-        .text('% of population');
+        .text(vis.config.yLabel || '% of population');
 
     vis.xAxisG = vis.chart.append('g')
       .attr('transform', `translate(0,${vis.height})`);
 
     vis.yAxisG = vis.chart.append('g');
+
+    vis.chart.append('text')
+      .attr('x', vis.width / 2)
+      .attr('y', vis.height + 82)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', 11)
+      .attr('fill', '#666')
+      .text('Countries');
 
     vis.updateVis();
   }
@@ -53,7 +61,8 @@ class ElectricityBarChart {
       .padding(0.2);
 
     vis.yScale = d3.scaleLinear()
-      .domain([0, 100])
+      .domain([0, d3.max(vis.data, d => d[vis.percent]) * 1.1 || 100])
+      .nice()
       .range([vis.height, 0]);
 
     vis.xAxis = d3.axisBottom(vis.xScale);
@@ -98,7 +107,7 @@ class ElectricityBarChart {
 				.style('display', 'block')
 				.html(`
 					<div><strong>${d.Entity}</strong> (${d.Code})</div>
-					<div>Electricity: <strong>${(+d[vis.percent]).toFixed(1)}%</strong></div>
+					<div>${d.resourceLabel || 'Value'}: <strong>${(+d[vis.percent]) >= 1000 ? d3.format(',.0f')(+d[vis.percent]) : (+d[vis.percent]).toFixed(2)}</strong> ${d.resourceUnit || ''}</div>
 					<div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${d.Year}</div>
 				`)
 				.style('left', (event.clientX + window.scrollX + 12) + 'px')

@@ -1,5 +1,3 @@
-
-
 class ChoroplethMap {
   constructor(_config, _geoData, _valueByCode, _colorInterpolator, _label) {
     this.config = {
@@ -83,15 +81,12 @@ class ChoroplethMap {
       .attr('stroke', '#999')
       .attr('stroke-width', 0.3)
       .on('mousemove', (event, d) => {
-       const name = d.properties?.name || 'Unknown';
+        const name = d.properties?.name || 'Unknown';
         const code = d.id;
         const v = vis.valueByCode.get(code);
-        const isElectricity = vis.colorInterpolator === d3.interpolatePurples;
-        const label = isElectricity ? 'Electricity Access' : 'Homicide Rate';
-        const unit = isElectricity ? '%' : ' per 100k';
         const formattedVal = (v === undefined || v === null || isNaN(v))
           ? 'No data'
-          : `${(+v).toFixed(1)}${unit}`;
+          : (v >= 1000 ? d3.format(',.0f')(v) : (+v).toFixed(1));
 
         tooltip
           .style('display', 'block')
@@ -99,7 +94,7 @@ class ChoroplethMap {
           .style('top', (event.clientY + window.scrollY + 12) + 'px')
           .html(`
             <div><strong>${name}</strong> (${code})</div>
-            <div>${label}: <strong>${formattedVal}</strong></div>
+            <div>${vis.label}: <strong>${formattedVal}</strong></div>
             <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${vis.config.year || 2020}</div>
           `);
       })

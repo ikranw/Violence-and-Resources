@@ -112,7 +112,6 @@ class ScatterPlot {
           .style('display', 'block')
           .html(`
             <div><strong>${d.Entity}</strong> (${d.Code})</div>
-            ${d.region ? `<div style="font-size:11px;color:#999">${d.region}</div>` : ''}
             <div>${d.rLabel || 'Resources'}: <strong>${(+d.electricity) >= 1000 ? d3.format(',.0f')(d.electricity) : (+d.electricity).toFixed(1)}</strong></div>
             <div>${d.vLabel || 'Violence'}: <strong>${(+d.homicide) >= 1000 ? d3.format(',.0f')(d.homicide) : (+d.homicide).toFixed(2)}</strong></div>
             <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${plot_year}</div>

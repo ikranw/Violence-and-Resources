@@ -41,15 +41,21 @@ class HomicideBarChart {
 
     vis.yAxisG = vis.chart.append('g');
 
+	vis.chart.append('text')
+      .attr('x', vis.width / 2)
+      .attr('y', vis.height + 82)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', 11)
+      .attr('fill', '#666')
+      .text('Countries');
+
+
     vis.updateVis();
   }
 
   updateVis() {
     const vis = this;
-
-    // Compute total count across all years for percentile (use unique codes as proxy)
-    const allCodes = new Set(vis.data.map(d => d.Code));
-    vis.totalCount = vis.data.length; // already filtered to top 25
+    vis.totalCount = vis.data.length; 
 
     vis.xScale = d3.scaleBand()
       .domain(vis.data.map(d => d.Code))
@@ -99,16 +105,12 @@ class HomicideBarChart {
 			event.preventDefault();
 			event.stopPropagation();
 
-			// rank within this sorted top-25 (1 = highest)
-			const rank = vis.data.indexOf(d) + 1;
-			const topPct = ((rank / vis.config.totalCountForYear) * 100).toFixed(1);
-
 			tooltip
 				.style('display', 'block')
 				.html(`
 					<div><strong>${d.Entity}</strong> (${d.Code})</div>
+				
 					<div>${d.rateLabel || 'Value'}: <strong>${(+d.rate) >= 1000 ? d3.format(',.0f')(+d.rate) : (+d.rate).toFixed(2)}</strong> ${d.rateUnit || ''}</div>
-					<div style="font-size:11px; color:#888; margin-top:2px;">Top ${topPct}% globally</div>
 					<div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${d.Year}</div>
 				`)
 				.style('left', (event.clientX + window.scrollX + 12) + 'px')

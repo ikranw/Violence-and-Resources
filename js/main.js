@@ -1,8 +1,8 @@
 console.log("Hello world");
 let data, visual1, visual2, visual3, choloreth;
 
-const map_year = 2020;
-const plot_year = 2019;
+const map_year = 2023;
+const plot_year = 2023;
 
 
 Promise.all([
@@ -69,19 +69,19 @@ Promise.all([
     }
 
     const { arr: vArr, vkey: vKey } = getSrc(violenceAttr);
-    const vAll2022 = vArr.filter(d => d.Year === 2022 && d.Code && !isNaN(d[vKey]) && d[vKey] > 0);
-    const totalVCount = vAll2022.length;
-    const violenceTop25 = vAll2022
+    const vAll2023 = vArr.filter(d => d.Year === 2023 && d.Code && !isNaN(d[vKey]) && d[vKey] > 0);
+    const totalVCount = vAll2023.length;
+    const voilence15 = vAll2023
       .sort((a, b) => b[vKey] - a[vKey])
-      .slice(0, 25)
+      .slice(0, 15)
       .map(d => ({ ...d, rate: d[vKey], rateLabel: vDS.label, rateUnit: vDS.unit }));
 
     d3.select('#chart1').selectAll('*').remove();
-    d3.select('#title-chart1').text(`${vDS.label} (2022) — Top 25`);
+    d3.select('#title-chart1').text(`${vDS.label} (2023) | Top 15`);
     d3.select('#sub-chart1').text(`${vDS.subheader}`);
     visual1 = new HomicideBarChart(
       { parentElement: '#chart1', containerHeight: 280, yLabel: vDS.unit, totalCountForYear: totalVCount },
-      violenceTop25
+      voilence15
     );
 
 
@@ -103,18 +103,18 @@ Promise.all([
 ); **/
 
     const { arr: rArr, vkey: rKey } = getSrc(resourcesAttr);
-    const resourceBottom25 = rArr
+    const resource15 = rArr
           .filter(d => d.Year === 2023 && d.Code && !isNaN(d[rKey]) && d[rKey] > 0)
           .sort((a, b) => a[rKey] - b[rKey])
-          .slice(0, 25)
+          .slice(0, 15)
           .map(d => ({ ...d, [rKey]: d[rKey], resourceLabel: rDS.label, resourceUnit: rDS.unit }));
 
     d3.select('#chart2').selectAll('*').remove();
-    d3.select('#title-chart2').text(`${rDS.label} (2023) — Bottom 25`);
+    d3.select('#title-chart2').text(`${rDS.label} (2023) | Bottom 15`);
     d3.select('#sub-chart2').text(`${rDS.subheader}`);
     visual2 = new ElectricityBarChart(
           { parentElement: '#chart2', containerHeight: 280, resourceKey: rKey, yLabel: rDS.unit },
-          resourceBottom25
+          resource15
     );
 
   /**const electric2023 = electricData
@@ -220,7 +220,7 @@ Promise.all([
       d3.interpolateReds,
       'Homicide rate per 100,000 people'**/
        { parentElement: '#map1', containerHeight: 380 },
-      worldGeo, homicideMap, vDS.colorScheme, `${vDS.label} — ${vDS.unit}`
+      worldGeo, homicideMap, vDS.colorScheme, `${vDS.label} (${vDS.unit})`
     );
 
     new ChoroplethMap(
@@ -230,7 +230,7 @@ Promise.all([
         d3.interpolatePurples,
         '% of population with access to electricity'**/
         { parentElement: '#map2', containerHeight: 380 },
-        worldGeo, electricityMap, rDS.colorScheme, `${rDS.label} — ${rDS.unit}`
+        worldGeo, electricityMap, rDS.colorScheme, `${rDS.label} (${rDS.unit})`
       );
   }
 

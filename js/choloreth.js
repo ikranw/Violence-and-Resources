@@ -95,8 +95,9 @@ class ChoroplethMap {
           .html(`
             <div><strong>${name}</strong> (${code})</div>
             <div>${vis.label}: <strong>${formattedVal}</strong></div>
-            <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${vis.config.year || 2020}</div>
+            <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${vis.config.year || 2023}</div>
           `);
+          
       })
       .on('mouseleave', () => tooltip.style('display', 'none'));
 

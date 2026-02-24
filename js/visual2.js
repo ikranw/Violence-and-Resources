@@ -107,7 +107,8 @@ class ElectricityBarChart {
 				.style('display', 'block')
 				.html(`
 					<div><strong>${d.Entity}</strong> (${d.Code})</div>
-					<div>${d.resourceLabel || 'Value'}: <strong>${(+d[vis.percent]) >= 1000 ? d3.format(',.0f')(+d[vis.percent]) : (+d[vis.percent]).toFixed(2)}</strong> ${d.resourceUnit || ''}</div>
+			
+                    <div>${d.resourceLabel || 'Value'}: <strong>${(+d[vis.percent]) >= 1000 ? d3.format(',.0f')(+d[vis.percent]) : (+d[vis.percent]).toFixed(2)}</strong> ${d.resourceUnit || ''}</div>
 					<div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${d.Year}</div>
 				`)
 				.style('left', (event.clientX + window.scrollX + 12) + 'px')

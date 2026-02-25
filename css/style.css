@@ -26,7 +26,7 @@ body {
 
 .header-title {
   margin: 0 0 8px 0;
-  font-size: 22px;
+  font-size: 48px;
   font-weight: 700;
   letter-spacing: 0.3px;
   text-align: center;
@@ -34,7 +34,7 @@ body {
 
 .header-subtitle {
   margin: 0;
-  font-size: 13px;
+  font-size: 20px;
   color: white;
   line-height: 1.6; 
 }
@@ -144,36 +144,39 @@ body {
 .charts-area { width: 100%; }
 
 .selector-panel {
-  align-items: flex-start;
+  display: flex;
+  align-items: center;
   flex-direction: row;
-  width: auto;
   background: white;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   padding: 12px 20px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  top: 5px;
-  margin-bottom: 20px;
-  gap: 28px;
+  margin: 0 auto 20px auto;
+  gap: 0;
   flex-wrap: wrap;
-
+  max-width: 1128px;
+  width: 100%;   
 }
-.panel-title { 
-    margin: 0 0 4px; 
-    font-size: 13px;
-     font-weight: 700; }
 
-.panel-hint  { 
-    margin: 0 0 12px;
-     font-size: 10px; 
-     color: #999; 
-     line-height: 1.4;
-     }
+.panel-title { 
+    margin: 0 20px 4px 0; 
+    font-size: 13px;
+    font-weight: 700; 
+    white-space: nowrap;
+    }
+
 
 .attr-group  { 
-    margin-bottom: 14px; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
     border-top: 1px solid #f0f0f0; 
-    padding-top: 8px;
+    padding:8px 20px;
+    border-top: none;
+    border-left: 1px solid #e0e0e0;
  }
 
 .group-label { 
@@ -181,7 +184,8 @@ body {
     font-weight: 700; 
     text-transform: uppercase;        
     letter-spacing: 0.5px;
-     margin-bottom: 6px; 
+    margin-bottom: 6px; 
+    white-space: nowrap;
     }
 
 .violence-label  {
@@ -192,15 +196,14 @@ body {
 }
 
 .attr-label {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-size: 12px;
   color: #333;
   padding: 4px 4px 4px 2px;
   border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
 }
 
 .attr-label:hover { 

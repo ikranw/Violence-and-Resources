@@ -48,7 +48,37 @@ class ElectricityBarChart {
       .attr('font-size', 11)
       .attr('fill', '#666')
       .text('Countries');
+    
 
+    vis.brush = d3.brushX()
+            .extent([[0, 0], [vis.width, vis.height]])
+            .on('end', (event) => {
+                if (!event.selection) {
+                window.selectedCodes = null;
+                } else {
+                const [x0, x1] = event.selection;
+        
+                window.selectedCodes = new Set(
+                    vis.data
+                    .filter(d => {
+                        const cx = vis.xScale(d.Code) + vis.xScale.bandwidth() / 2;
+                        return cx >= x0 && cx <= x1;
+                    })
+                    .map(d => d.Code)
+                );
+                }
+                
+                document.dispatchEvent(new CustomEvent('brushed', { detail: window.selectedCodes }));
+            });
+    
+    vis.brushG = vis.chart.append('g').attr('class', 'brush').call(vis.brush);
+
+    document.addEventListener('mapBrushed', (e) => {
+            const selected = e.detail;
+            vis.chart.selectAll('.bar')
+                .attr('opacity', d => !selected || selected.has(d.Code) ? 1 : 0.25);
+        });
+       
     vis.updateVis();
   }
 

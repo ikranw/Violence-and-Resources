@@ -51,6 +51,13 @@ class ChoroplethMap {
 
     vis.domainMax = maxVal;
     vis.new_features = new_features;
+    document.addEventListener('brushed', (e) => {
+      const selected = e.detail;
+      vis.chart.selectAll('.country')
+        .attr('opacity', d => !selected || selected.has(d.id) ? 1 : 0.25)
+        .attr('stroke', d => window.mapSelected.has(d.id) ? '#333' : '#999')
+        .attr('stroke-width', d => window.mapSelected.has(d.id) ? 2 : 0.3);
+    });
 
 
     vis.updateVis();
@@ -78,16 +85,17 @@ class ChoroplethMap {
 
         return (v === undefined || v === null || isNaN(v)) ? '#eee' : vis.colorScale(v);
       })
-      .attr('stroke', '#999')
-      .attr('stroke-width', 0.3)
-      .on('mousemove', (event, d) => {
+
+     .attr('stroke', f => window.mapSelected.has(f.id) ? '#333' : '#999')
+     .attr('stroke-width', f => window.mapSelected.has(f.id) ? 2 : 0.3)
+     .on('mousemove', (event, d) => {
         const name = d.properties?.name || 'Unknown';
         const code = d.id;
         const v = vis.valueByCode.get(code);
         const formattedVal = (v === undefined || v === null || isNaN(v))
           ? 'No data'
           : (v >= 1000 ? d3.format(',.0f')(v) : (+v).toFixed(1));
-
+        
         tooltip
           .style('display', 'block')
           .style('left', (event.clientX + window.scrollX + 12) + 'px')
@@ -97,10 +105,23 @@ class ChoroplethMap {
             <div>${vis.label}: <strong>${formattedVal}</strong></div>
             <div style="font-size:12px; color:#8B4513; margin-top:4px;">Year: ${vis.config.year || 2023}</div>
           `);
-          
-      })
-      .on('mouseleave', () => tooltip.style('display', 'none'));
-
+          })
+    .on('mouseleave', () => tooltip.style('display', 'none'))
+    .on('click', (event, d) => {
+            const code = d.id;
+            if (window.mapSelected.has(code)) {
+                window.mapSelected.delete(code);
+            } else {
+                window.mapSelected.add(code);
+            }
+            vis.chart.selectAll('.country')
+                .attr('stroke', f => window.mapSelected.has(f.id) ? '#333' : '#999')
+                .attr('stroke-width', f => window.mapSelected.has(f.id) ? 2 : 0.3);
+            document.dispatchEvent(new CustomEvent('mapBrushed', { 
+                detail: window.mapSelected.size > 0 ? new Set(window.mapSelected) : null 
+        }));
+      
+    });
     vis.drawLegend();
   }
 

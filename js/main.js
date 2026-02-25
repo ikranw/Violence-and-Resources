@@ -4,6 +4,8 @@ let data, visual1, visual2, visual3, choloreth;
 const map_year = 2023;
 const plot_year = 2023;
 
+window.mapSelected = new Set();
+window.selectedCodes = null;
 
 Promise.all([
   d3.csv('data/homicide_rate.csv'),

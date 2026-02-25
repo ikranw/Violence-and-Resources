@@ -54,6 +54,19 @@ class ScatterPlot {
       .attr('font-size', 11)
       .text(vis.config.yLabel);
 
+    document.addEventListener('brushed', (e) => {
+      const selected = e.detail;
+      vis.chart.selectAll('.dot')
+        .attr('opacity', d => !selected || selected.has(d.Code) ? 0.9 : 0.15)
+        .attr('r', d => !selected || selected.has(d.Code) ? 6 : 4);
+});
+    document.addEventListener('mapBrushed', (e) => {
+      const selected = e.detail;
+      vis.chart.selectAll('.dot')
+        .attr('opacity', d => !selected || selected.has(d.Code) ? 0.9 : 0.15)
+        .attr('r', d => !selected || selected.has(d.Code) ? 6 : 4);
+    });
+
     vis.updateVis();
   }
 
@@ -127,5 +140,6 @@ class ScatterPlot {
     d3.select('body').on('click.tooltip-hide', () => {
       tooltip.style('display', 'none');
     });
+
   }
 }
